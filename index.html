@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ana Clara Bittar</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Ana Clara Bittar — account management and content operations for agencies and B2B brands. Async-first, based in Portugal.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600&display=swap">
+<style>
+/* Layout: one narrow reading column on sage paper, wide margins, a content-pipeline motif in the hero */
+:root{
+  --bg:#EEF0E8; --surface:#E4E8DB; --ink:#1E281C; --muted:#5A6455; --line:#C8CEBC; --accent:#4D6838; --accent-soft:#D6DFC8;
+  --f-display:"Instrument Serif", Georgia, "Times New Roman", serif;
+  --f-body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --step--1:.75rem; --step-0:1.0625rem; --step-1:1.5rem; --step-2:clamp(2rem, 5vw, 2.6rem); --step-3:clamp(3rem, 9vw, 4.75rem);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#131712; --surface:#1B2019; --ink:#E5E9DC; --muted:#9CA594; --line:#2D3429; --accent:#A8C28C; --accent-soft:#263022; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#131712; --surface:#1B2019; --ink:#E5E9DC; --muted:#9CA594; --line:#2D3429; --accent:#A8C28C; --accent-soft:#263022; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:var(--step-0); line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px));}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top, 0px); z-index:10; background:var(--bg)}
+.wrap{max-width:44rem; margin:0 auto}
+a{color:inherit}
+a:focus-visible, button:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:3px}
+h1,h2,h3{font-family:var(--f-display); font-weight:400; text-wrap:balance; margin:0; letter-spacing:-.005em}
+p{margin:0}
+.label{font-family:var(--f-mono); font-size:var(--step--1); font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:var(--muted)}
+
+/* nav */
+nav{position:sticky; top:env(safe-area-inset-top, 0px); z-index:5; background:var(--bg); border-bottom:1px solid var(--line)}
+nav .wrap{display:flex; justify-content:space-between; align-items:center; gap:1rem; padding-block:.85rem; flex-wrap:wrap}
+nav .name{font-family:var(--f-display); font-size:1.3rem; text-decoration:none}
+nav ul{list-style:none; display:flex; gap:1.1rem; margin:0; padding:0; flex-wrap:wrap}
+nav ul a{text-decoration:none; font-size:.9rem; color:var(--muted)}
+nav ul a:hover{color:var(--ink)}
+@media (max-width:560px){ nav ul{gap:.8rem} nav ul li.opt{display:none} }
+
+section{padding-block:clamp(3.5rem, 9vw, 5.5rem); border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:0}
+.sec-head{display:grid; gap:.75rem; margin-bottom:2.25rem}
+.sec-head h2{font-size:var(--step-2); line-height:1.2}
+
+/* hero */
+.hero{padding-block:clamp(3.5rem, 10vw, 6rem) clamp(3rem, 8vw, 4.5rem)}
+.hero .hello{font-size:var(--step-3); line-height:1.05}
+.hero .role{margin-top:1rem; color:var(--muted)}
+.hero .hello em{color:var(--accent)}
+.hero .thesis{margin-top:2rem; font-size:1.25rem; line-height:1.55; max-width:36rem}
+.hero .thesis em{font-style:normal; color:var(--accent); font-weight:500}
+
+.pipeline{margin-top:2.75rem; border:1px solid var(--line); border-radius:6px; background:var(--surface); padding:1.1rem 1.1rem 1rem}
+.pipeline .top{display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; margin-bottom:.9rem}
+.pipeline ol{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:.4rem}
+.pipeline li{font-family:var(--f-mono); font-size:.75rem; padding:.55rem .4rem; border-radius:4px; text-align:center;
+  border:1px solid var(--line); color:var(--muted); background:var(--bg); transition:background .4s, color .4s, border-color .4s}
+.pipeline li.on{background:var(--accent-soft); color:var(--ink); border-color:var(--accent)}
+.pipeline li.done{color:var(--ink)}
+.pipeline li.done::before{content:"✓ "; color:var(--accent)}
+.pipeline .caption{margin-top:.85rem; font-size:.875rem; color:var(--muted)}
+@media (max-width:520px){ .pipeline ol{grid-template-columns:1fr; } .pipeline li{text-align:left; padding:.5rem .7rem} }
+
+.hero .ctas{margin-top:2.25rem; display:flex; gap:1.25rem; flex-wrap:wrap; align-items:center}
+.btn{display:inline-block; font:500 .95rem var(--f-body); padding:.7rem 1.15rem; border-radius:4px; text-decoration:none;
+  background:var(--ink); color:var(--bg); border:1px solid var(--ink); cursor:pointer}
+.btn:hover{background:var(--accent); border-color:var(--accent)}
+.link{font-size:.95rem; color:var(--muted); text-decoration-color:var(--line); text-underline-offset:4px}
+.link:hover{color:var(--ink)}
+
+/* photo placeholders */
+.photo{border:1px dashed var(--line); border-radius:6px; background:var(--surface); display:grid; place-items:center;
+  text-align:center; color:var(--muted); font-family:var(--f-mono); font-size:.75rem; letter-spacing:.04em; padding:1rem; max-width:100%}
+.portrait-img{display:block; width:100%; max-width:100%; height:auto; border-radius:6px; filter:grayscale(100%) contrast(1.02)}
+.portrait-cap{margin-top:.6rem; font-size:.8rem; color:var(--muted)}
+@media (max-width:640px){ .about-grid figure{max-width:15rem} }
+figure{margin:0}
+
+/* background */
+.about-grid{display:grid; grid-template-columns:minmax(0,1fr) 13rem; gap:2.5rem; align-items:start}
+@media (max-width:640px){ .about-grid{grid-template-columns:1fr} }
+.about-grid p + p{margin-top:1rem}
+.timeline{list-style:none; margin:2.5rem 0 0; padding:0; display:grid; gap:0}
+.timeline li{display:grid; grid-template-columns:7.5rem minmax(0,1fr); gap:1.25rem; padding-block:1.1rem; border-top:1px solid var(--line)}
+.timeline li:last-child{border-bottom:1px solid var(--line)}
+.timeline .where{font-family:var(--f-mono); font-size:.78rem; color:var(--muted); padding-top:.2rem}
+.timeline h3{font-family:var(--f-body); font-weight:600; font-size:1rem}
+.timeline p{color:var(--muted); font-size:.95rem; margin-top:.2rem}
+@media (max-width:480px){ .timeline li{grid-template-columns:1fr; gap:.3rem} }
+
+/* services */
+.services{display:grid; gap:2.25rem}
+.service h3{font-size:var(--step-1); line-height:1.2}
+.service > p{margin-top:.5rem; color:var(--muted); max-width:36rem}
+.service ul{margin:.9rem 0 0; padding:0; list-style:none; display:grid; gap:.4rem}
+.service li{padding-left:1.1rem; position:relative; font-size:.97rem}
+.service li::before{content:""; position:absolute; left:0; top:.7em; width:.45rem; height:1px; background:var(--accent)}
+.tools{margin-top:.9rem; font-family:var(--f-mono); font-size:.75rem; color:var(--muted)}
+
+/* work */
+.cases{display:grid; gap:1rem}
+.case{border:1px solid var(--line); border-radius:6px; background:var(--surface)}
+.case summary{list-style:none; cursor:pointer; padding:1.25rem 1.25rem; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:1rem; align-items:start}
+.case summary::-webkit-details-marker{display:none}
+.case summary h3{font-size:1.45rem; line-height:1.2}
+.case summary .tag{display:block; margin-bottom:.45rem}
+.case summary .result{display:block; margin-top:.6rem; font-size:.92rem; color:var(--accent); font-weight:500}
+.case .plus{font-family:var(--f-mono); color:var(--muted); font-size:1.1rem; line-height:1; padding-top:.1rem; transition:transform .2s}
+.case[open] .plus{transform:rotate(45deg)}
+.case .body{padding:0 1.25rem 1.35rem; display:grid; gap:1rem; border-top:1px solid var(--line); padding-top:1.1rem; margin-inline:0}
+.case .body p{color:var(--muted); font-size:.97rem}
+.case .body ul{margin:0; padding-left:1.1rem; display:grid; gap:.35rem; font-size:.95rem}
+.case .body .k{font-family:var(--f-mono); font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin-bottom:.35rem}
+.hint{margin-top:1rem; font-size:.85rem; color:var(--muted)}
+
+/* approach */
+.principles{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:2rem 2.5rem}
+@media (max-width:600px){ .principles{grid-template-columns:1fr} }
+.principles h3{font-family:var(--f-body); font-weight:600; font-size:1rem}
+.principles p{margin-top:.35rem; color:var(--muted); font-size:.95rem}
+.quote{margin-top:3rem; font-family:var(--f-display); font-style:italic; font-size:1.9rem; line-height:1.3; max-width:34rem}
+
+/* contact */
+.contact h2{font-size:var(--step-2)}
+.contact > .wrap > p{margin-top:1rem; color:var(--muted); max-width:34rem}
+.email-row{margin-top:2rem; display:flex; gap:.75rem; flex-wrap:wrap; align-items:center}
+.email{font-family:var(--f-mono); font-size:clamp(.9rem, 3.6vw, 1.15rem); user-select:all; padding:.65rem .9rem; border:1px solid var(--line); border-radius:4px; background:var(--surface); overflow-wrap:anywhere; min-width:0}
+.copy-btn{font:500 .9rem var(--f-body); padding:.7rem 1rem; border-radius:4px; border:1px solid var(--ink); background:transparent; color:var(--ink); cursor:pointer}
+.copy-btn:hover{background:var(--ink); color:var(--bg)}
+.status{font-size:.85rem; color:var(--accent); min-height:1.2em}
+footer{padding-block:2rem 3rem; font-size:.85rem; color:var(--muted)}
+footer .wrap{display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<nav aria-label="Main">
+  <div class="wrap">
+    <a class="name" href="#top">Ana Clara Bittar</a>
+    <ul>
+      <li class="opt"><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#work">Work</a></li>
+      <li class="opt"><a href="#approach">How I work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <p class="label">Account &amp; project management · Content operations</p>
+      <h1 class="hello" style="margin-top:1rem">Hi, I'm <em>Ana Clara</em>.</h1>
+      <p class="role">I keep client accounts and content operations running for agencies and B2B brands.</p>
+      <p class="thesis">Behind every post a client approves there's a calendar, a brief, a design handoff, a round of feedback and a scheduled date. <em>I look after that path</em>, so the work gets out on time and nobody has to chase it.</p>
+
+      <div class="pipeline" aria-label="Example: one post moving through a content workflow">
+        <div class="top">
+          <span class="label">One post, start to finish</span>
+          <span class="label" id="pl-state">Stage 3 of 5</span>
+        </div>
+        <ol id="pl">
+          <li class="done">Brief</li>
+          <li class="done">Draft</li>
+          <li class="on">Client review</li>
+          <li>Approved</li>
+          <li>Scheduled</li>
+        </ol>
+        <p class="caption">Nothing goes live without sign-off, and nothing waits in review without someone noticing.</p>
+      </div>
+
+      <div class="ctas">
+        <a class="btn" href="#work">See selected work</a>
+        <a class="link" href="#contact">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">About</span>
+        <h2>It started with marketing, then moved to the people and processes behind it.</h2>
+      </div>
+      <div class="about-grid">
+        <div>
+          <p>I studied Marketing and Advertising in Brazil and started out in social media. Over the next few years I moved closer to clients: customer success, partner management, and then account management for creators and brands.</p>
+          <p>Along the way I noticed that the part I liked most wasn't the meetings. It was building the systems that keep work moving: the calendar that flags a gap early, the approval flow that stops a post from shipping too soon, the automation that removes a step people kept forgetting.</p>
+          <p>Today I live in Portugal and run content operations for B2B clients at a marketing agency, mostly async, through Slack and Notion.</p>
+        </div>
+        <figure>
+          <img class="portrait-img" src="ana.jpg" alt="Portrait of Ana Clara Bittar" width="720" height="720">
+        </figure>
+      </div>
+
+      <ol class="timeline" aria-label="Career path">
+        <li><span class="where">Brazil</span><div><h3>Marketing &amp; Advertising degree</h3><p>Then social media management at Road Agency.</p></div></li>
+        <li><span class="where">Brazil</span><div><h3>Customer success &amp; partner management</h3><p>Stone Co., then Teleperformance on the Google YouTube partner team.</p></div></li>
+        <li><span class="where">Passion.io</span><div><h3>Customer Success Manager, creator platform</h3><p>A portfolio of premium creator accounts worth $525K+ in ARR, with zero early churn. Hands-on with platform setup, migrations and Zapier automations.</p></div></li>
+        <li><span class="where">Portugal · now</span><div><h3>Account Manager, B2B marketing agency</h3><p>LinkedIn and X content operations for a multi-client portfolio: calendars, approvals, weekly reporting and process design.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Services</span>
+        <h2>Three kinds of support. Most teams need a little of each.</h2>
+      </div>
+      <div class="services">
+        <div class="service">
+          <h3>Account management</h3>
+          <p>A steady point of contact for your clients, so they always know where their work stands.</p>
+          <ul>
+            <li>Day-to-day client communication, written and clear</li>
+            <li>Approval workflows and feedback consolidation</li>
+            <li>Weekly status and performance reporting</li>
+            <li>Relationship tracking, so no account goes quiet</li>
+          </ul>
+          <p class="tools">Slack · Notion · Google Workspace</p>
+        </div>
+        <div class="service">
+          <h3>Content operations</h3>
+          <p>A content calendar that stays current, and a workflow that moves each piece from brief to published.</p>
+          <ul>
+            <li>Calendar management and scheduling for LinkedIn and X</li>
+            <li>Design briefs that turn rough ideas into clear asks</li>
+            <li>Quality checks before anything goes live</li>
+            <li>Gap audits that catch empty slots before the deadline</li>
+          </ul>
+          <p class="tools">Notion · Canva · scheduling tools</p>
+        </div>
+        <div class="service">
+          <h3>Process &amp; automation</h3>
+          <p>Fewer manual steps and less depending on someone's memory.</p>
+          <ul>
+            <li>Documented SOPs for onboarding and handoffs</li>
+            <li>Form-triggered workflows and Slack notifications</li>
+            <li>Lightweight trackers and reporting templates</li>
+            <li>Course and community platform setup (Kajabi, Thinkific, Teachable, Passion.io)</li>
+          </ul>
+          <p class="tools">Zapier · Notion · Kajabi · Thinkific</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Selected work</span>
+        <h2>Four projects about keeping work moving.</h2>
+      </div>
+      <div class="cases">
+        <details class="case">
+          <summary>
+            <div>
+              <span class="label tag">Content operations</span>
+              <h3>Content operations &amp; approval system for a multi-client B2B portfolio</h3>
+              <span class="result">Scaled without a single dropped deadline</span>
+            </div>
+            <span class="plus" aria-hidden="true">+</span>
+          </summary>
+          <div class="body">
+            <p>With many accounts running in parallel, content could easily get stuck waiting on a visual, needing a shorter version for another platform, or falling off the calendar until the deadline was close.</p>
+            <div><p class="k">What I did</p>
+            <ul>
+              <li>Ran a recurring calendar audit across every active account to flag gaps early</li>
+              <li>Kept a daily, per-client breakdown of what was blocked and why</li>
+              <li>Set up a two-stage flow: content stays internal until approved, then moves to the client-facing calendar</li>
+              <li>Checked every post before it went live: visuals matched the copy, tags were right, sensitive details hidden</li>
+            </ul></div>
+          </div>
+        </details>
+
+        <details class="case">
+          <summary>
+            <div>
+              <span class="label tag">Process &amp; automation</span>
+              <h3>Turning a manual onboarding step into an automated workflow</h3>
+              <span class="result">Built on my own initiative, not requested</span>
+            </div>
+            <span class="plus" aria-hidden="true">+</span>
+          </summary>
+          <div class="body">
+            <p>Each new client needed a standard set of tracking documents created by hand. There was no clear trigger for "a new client has arrived," so the step was often missed until a deadline was close.</p>
+            <div><p class="k">What I did</p>
+            <ul>
+              <li>Mapped the existing process and found where it broke down</li>
+              <li>Proposed a form-triggered workflow: submitting client details creates the documents and notifies the team in Slack</li>
+              <li>Built the case and presented it proactively</li>
+            </ul></div>
+            <p>Onboarding no longer depends on someone remembering to do it.</p>
+          </div>
+        </details>
+
+        <details class="case">
+          <summary>
+            <div>
+              <span class="label tag">Account management</span>
+              <h3>Account health reporting &amp; relationship cadence</h3>
+              <span class="result">Structured weekly reporting, zero missed touchpoints</span>
+            </div>
+            <span class="plus" aria-hidden="true">+</span>
+          </summary>
+          <div class="body">
+            <p>Delivering content is half of the job. The other half is keeping each relationship visible and healthy.</p>
+            <div><p class="k">What I did</p>
+            <ul>
+              <li>Produced account health reports on a fixed schedule</li>
+              <li>Tracked a light relationship task per account and flagged when outreach had lapsed</li>
+              <li>Communicated in writing and ahead of time: status, blockers, even planned absences</li>
+            </ul></div>
+            <p>Clients get consistent updates without another status call on the calendar.</p>
+          </div>
+        </details>
+
+        <details class="case">
+          <summary>
+            <div>
+              <span class="label tag">Creator platforms</span>
+              <h3>Kajabi &amp; course platform setup, from blank account to launch</h3>
+              <span class="result">$525K ARR portfolio managed · zero early churn</span>
+            </div>
+            <span class="plus" aria-hidden="true">+</span>
+          </summary>
+          <div class="body">
+            <p>As a Customer Success Manager at a creator platform, I worked hands-on with premium creator and coaching brands to set up and launch their programs.</p>
+            <div><p class="k">What I did</p>
+            <ul>
+              <li>Configured course and community platforms: onboarding flows, content libraries, community spaces</li>
+              <li>Migrated content from other platforms and organized creators' files</li>
+              <li>Built Zapier automations that cut manual work for course creators</li>
+              <li>Closed a $5K upsell while supporting retention through smooth onboarding</li>
+            </ul></div>
+          </div>
+        </details>
+      </div>
+      <p class="hint">Tap a project to read more.</p>
+    </div>
+  </section>
+
+  <section id="approach">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">How I work</span>
+        <h2>Async first, written down, and early rather than urgent.</h2>
+      </div>
+      <div class="principles">
+        <div><h3>Written over live</h3><p>Updates, decisions and next steps go in Slack or Notion, where anyone can find them later. Calls are for the conversations that need one.</p></div>
+        <div><h3>Flag it early</h3><p>A gap in the calendar on Monday is easy to fix. The same gap on Friday is a problem. I look ahead so you don't have to.</p></div>
+        <div><h3>Systems over memory</h3><p>If a step depends on someone remembering it, it will eventually be missed. I turn those steps into checklists, templates or automations.</p></div>
+        <div><h3>Flexible across time zones</h3><p>Based in Portugal and fully fluent in English. I keep flexible hours and cover reasonable overlap with US or EU teams.</p></div>
+      </div>
+      <p class="quote">When everyone can see where the work stands, the work gets lighter.</p>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <span class="label">Contact</span>
+      <h2 style="margin-top:.75rem">Have a project that needs someone to keep it moving?</h2>
+      <p>Send me a note with what you're working on. I reply personally, usually within a day.</p>
+      <div class="email-row">
+        <span class="email" id="email">anaclara.bittar@hotmail.com</span>
+        <button class="copy-btn" id="copy" type="button">Copy email</button>
+      </div>
+      <p class="status" id="copy-status" aria-live="polite"></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Ana Clara Bittar · Portugal</span>
+    <a class="link" href="#top">Back to top</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // copy email
+  var btn=document.getElementById('copy'), out=document.getElementById('copy-status'), el=document.getElementById('email');
+  btn.addEventListener('click', function(){
+    var text=el.textContent.trim();
+    function fallback(){
+      var r=document.createRange(); r.selectNodeContents(el);
+      var s=window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      out.textContent='Selected. Press Ctrl+C (or ⌘C) to copy.';
+    }
+    try{
+      navigator.clipboard.writeText(text).then(function(){ out.textContent='Copied.'; }, fallback);
+    }catch(e){ fallback(); }
+  });
+
+  // pipeline: step one post through the stages
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var items=[].slice.call(document.querySelectorAll('#pl li')), state=document.getElementById('pl-state'), i=2;
+  setInterval(function(){
+    i=(i+1)%(items.length+1);
+    items.forEach(function(li,n){
+      li.classList.toggle('done', n<i);
+      li.classList.toggle('on', n===i);
+    });
+    state.textContent = i<items.length ? 'Stage '+(i+1)+' of '+items.length : 'Live';
+  }, 2200);
+})();
+</script>
+</body>
+</html>
